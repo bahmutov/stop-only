@@ -33,13 +33,14 @@ If using [pre-git][pre-git] to configure Git hooks, run this tool as a command
 }
 ```
 
-See [package.json](package.json)
+See [package.json](package.json) (note here we have just local script name).
 
 [pre-git]: github.com/bahmutov/pre-git#readme
 
 ### CI
 
-On CI run the tool after install, for example see [.travis.yml](.travis.yml)
+On CI run the tool after install, for example see [.travis.yml](.travis.yml),
+(note here we have just local script name).
 
 ```
 - $(npm bin)/stop-only specs
