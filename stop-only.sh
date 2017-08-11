@@ -7,7 +7,10 @@ if [ "$test_folder" == "" ]; then
   exit 1
 fi
 
-if grep --line-number --recursive '\.only' $test_folder; then
+# echo "command"
+# echo grep --line-number --recursive '\.only' "$@"
+
+if grep --line-number --recursive '\.only' "$@"; then
   echo "Found .only in folder '$test_folder' 👎"
   exit 1
 fi

@@ -17,7 +17,27 @@ npm install --save-dev stop-only
 
 ## Use
 
-Assuming the tests are in the folder "specs"
+Assuming the tests are in the folder "specs", I recommend create an NPM
+run script
+
+```json
+{
+  "scripts": {
+    "stop-only": "stop-only specs"
+  }
+}
+```
+
+If you need to exclude certain folders, use `grep` syntax
+[reference](https://explainshell.com/explain/1/grep)
+
+```json
+{
+  "scripts": {
+    "stop-only": "stop-only specs --exclude-dir node_modules"
+  }
+}
+```
 
 ### Pre-commit or pre-push hook
 
@@ -27,7 +47,7 @@ If using [pre-git][pre-git] to configure Git hooks, run this tool as a command
 {
   "config": {
     "pre-git": {
-      "pre-push": ["stop-build specs"]
+      "pre-push": ["npm run stop-only"]
     }
   }
 }
@@ -43,7 +63,7 @@ On CI run the tool after install, for example see [.travis.yml](.travis.yml),
 (note here we have just local script name).
 
 ```
-- $(npm bin)/stop-only specs
+- npm run stop-only
 ```
 
 ### Small print
