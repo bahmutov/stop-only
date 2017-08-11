@@ -18,7 +18,7 @@
         "npm run ban"
       ],
       "pre-push": [
-        "./stop-only.sh",
+        "./stop-only.sh src",
         "npm run secure",
         "npm run license",
         "npm run ban -- --all",
