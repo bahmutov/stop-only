@@ -8,6 +8,7 @@ node_js:
   - '6'
 before_script:
   - npm prune
+  - $(npm bin)/stop-only specs
 after_success:
   - npm run semantic-release
 branches:

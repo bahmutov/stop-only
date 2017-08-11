@@ -1,6 +1,1 @@
-'use strict'
-
-
-
-module.exports = true
-
+throw new Error('There is no NPM module')

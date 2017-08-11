@@ -10,13 +10,41 @@
 
 ## Install
 
-Requires [Node](https://nodejs.org/en/) version 6 or above.
+Requires [Node](https://nodejs.org/en/), but this is a shell script.
 
 ```sh
-npm install --save stop-only
+npm install --save-dev stop-only
 ```
 
 ## Use
+
+Assuming the tests are in the folder "specs"
+
+### Pre-commit or pre-push hook
+
+If using [pre-git][pre-git] to configure Git hooks, run this tool as a command
+
+```json
+{
+  "config": {
+    "pre-git": {
+      "pre-push": ["stop-build specs"]
+    }
+  }
+}
+```
+
+See [package.json](package.json)
+
+[pre-git]: github.com/bahmutov/pre-git#readme
+
+### CI
+
+On CI run the tool after install, for example see [.travis.yml](.travis.yml)
+
+```
+- $(npm bin)/stop-only specs
+```
 
 ### Small print
 
