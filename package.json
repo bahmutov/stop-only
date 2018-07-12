@@ -69,7 +69,8 @@
     "test": "npm run unit",
     "unit": "mocha src/*-spec.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "stop-only": "./stop-only.sh src --exclude-dir excluded"
+    "stop-only": "./stop-only.sh src --exclude-dir excluded",
+    "warn-only": "./stop-only.sh --warn src"
   },
   "release": {
     "analyzeCommits": "simple-commit-message",

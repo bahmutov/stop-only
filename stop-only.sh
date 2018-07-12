@@ -18,10 +18,7 @@ if [ "$test_folder" == "" ]; then
   exit 1
 fi
 
-# echo "command"
-# echo grep --line-number --recursive '\.only' "$@"
-
-if grep --line-number --recursive '\.only' "$arguments"; then
+if grep --line-number --recursive '\.only' $arguments; then
   if [ $warn = 1 ]; then
     echo "⚠️ Found .only in folder '$test_folder'"
   else

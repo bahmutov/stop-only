@@ -9,6 +9,7 @@ node_js:
 before_script:
   - npm prune
   - npm run stop-only
+  - npm run warn-only
 after_success:
   - npm run semantic-release
 branches:
