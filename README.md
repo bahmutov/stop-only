@@ -17,6 +17,8 @@ npm install --save-dev stop-only
 
 ## Use
 
+### basic
+
 Assuming the tests are in the folder "specs", I recommend create an NPM
 run script
 
@@ -27,6 +29,12 @@ run script
   }
 }
 ```
+
+### warn
+
+If you just want to warn on found `.only`, use `stop-only --warn <folder>` syntax.
+
+### exclude folders
 
 If you need to exclude certain folders, use `grep` syntax
 [reference](https://explainshell.com/explain/1/grep)
@@ -54,6 +62,8 @@ If using [pre-git][pre-git] to configure Git hooks, run this tool as a command
 ```
 
 See [package.json](package.json) (note here we have just local script name).
+
+**tip** you can warn on commit hook, while fail in pre-push hook.
 
 [pre-git]: github.com/bahmutov/pre-git#readme
 
