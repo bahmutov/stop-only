@@ -24,10 +24,34 @@ if (!argv.folder || !argv.folder.length) {
   process.exit(1)
 }
 
-let skipFolders = []
-if (argv.skip) {
-  skipFolders = skipFolders.concat(argv.skip)
+const toArray = x => (Array.isArray(x) ? x : [x])
+
+const normalizeStrings = listOrString => {
+  const strings = toArray(listOrString)
+  // ? can we just split and flatten result array?
+  let normalized = []
+  strings.forEach(s => {
+    if (s === undefined || s === null) {
+      return
+    }
+
+    if (s.includes(',')) {
+      normalized = normalized.concat(s.split(','))
+    } else {
+      normalized.push(s)
+    }
+  })
+  return normalized
 }
+
+// user should be able to pass multiple folders with single argument separated by commas
+// like "--folder foo,bar,baz"
+// next code block splits these arguments and normalizes everything into list of strings
+const splitFolders = normalizeStrings(argv.folder)
+debug('split folders', splitFolders)
+
+const skipFolders = normalizeStrings(argv.skip)
+
 let grepArguments = ['--line-number', '--recursive', '\\.only']
 
 if (skipFolders.length) {
@@ -36,7 +60,7 @@ if (skipFolders.length) {
   })
 }
 
-grepArguments = grepArguments.concat(argv.folder)
+grepArguments = grepArguments.concat(splitFolders)
 
 if (debug.enabled) {
   console.log('grep arguments')

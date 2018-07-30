@@ -68,6 +68,16 @@ See [package.json](package.json) (note here we have just local script name).
 
 [pre-git]: github.com/bahmutov/pre-git#readme
 
+### Commas
+
+You can pass multiple folder names as separate arguments or comma-separated. These are equivalent
+
+```
+stop-only --folder foo --folder bar --skip src --skip source
+stop-only -f foo -f bar -s src -s source
+stop-only -f foo,bar -s src,source
+```
+
 ### Debugging
 
 You can see additional diagnostic output from this command by running with environment variable `DEBUG=stop-only`

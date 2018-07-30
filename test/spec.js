@@ -29,6 +29,14 @@ describe('stop-only', () => {
         })
     })
 
+    it('finds in both folders f1, f2', () => {
+      return execaWrap('node', [bin, '--folder', f2 + ',' + f1], wrapOptions)
+        .then(result => {
+          la(result.includes('code: 1'), 'did not exit with 1', result)
+          la(result.includes('Found .only'), 'did not find', result)
+        })
+    })
+
     it('finds using alias -f', () => {
       return execaWrap('node', [bin, '-f', f2, '-f', f1], wrapOptions)
         .then(result => {
@@ -47,6 +55,13 @@ describe('stop-only', () => {
 
       it('skips folder with an alias -s', () => {
         return execaWrap('node', [bin, '-f', f3, '-s', 'skip'], wrapOptions)
+          .then(result => {
+            la(result.includes('code: 0'), 'did not exit with 0', result)
+          })
+      })
+
+      it('skips folder with an alias -s and commas', () => {
+        return execaWrap('node', [bin, '-f', f3, '-s', 'skip,foo,bar'], wrapOptions)
           .then(result => {
             la(result.includes('code: 0'), 'did not exit with 0', result)
           })
