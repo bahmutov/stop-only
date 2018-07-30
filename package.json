@@ -14,7 +14,7 @@
         "npm prune",
         "npm run deps",
         "npm test",
-        "node bin/stop-only.js --warn src",
+        "node bin/stop-only.js --warn --folder src",
         "git add src/*.js",
         "npm run ban"
       ],
