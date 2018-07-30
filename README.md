@@ -67,6 +67,10 @@ See [package.json](package.json) (note here we have just local script name).
 
 [pre-git]: github.com/bahmutov/pre-git#readme
 
+### Debugging
+
+You can see additional diagnostic output from this command by running with environment variable `DEBUG=stop-only`
+
 ### CI
 
 On CI run the tool after install, for example see [.travis.yml](.travis.yml),
