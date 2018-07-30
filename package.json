@@ -95,5 +95,10 @@
     "semantic-release": "6.3.6",
     "simple-commit-message": "3.3.1",
     "standard": "11.0.1"
+  },
+  "dependencies": {
+    "debug": "3.1.0",
+    "execa": "0.10.0",
+    "minimist": "1.2.0"
   }
 }
