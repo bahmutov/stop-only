@@ -1,2 +1,2 @@
 // this folder should not be searched for .only
-it.only('f1/file1', () => {})
+it.only('f3/skip/file4', () => {})
