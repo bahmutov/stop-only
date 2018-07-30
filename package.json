@@ -69,7 +69,7 @@
     "test": "npm run unit",
     "unit": "mocha test/spec.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "stop-only": "node bin/stop-only.js -f src --exclude-dir excluded",
+    "stop-only": "node bin/stop-only.js -f src --skip excluded",
     "warn-only": "node bin/stop-only.js --warn -f src"
   },
   "release": {
