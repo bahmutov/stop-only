@@ -16,6 +16,11 @@ if (debug.enabled) {
   console.log(argv)
 }
 
+if (!argv.folder || !argv.folder.length) {
+  console.error('🔥 stop-only: pass at least a single folder with --folder, -f argument')
+  process.exit(1)
+}
+
 const grepArguments = ['--line-number', '--recursive', '\\.only'].concat(argv.folder)
 if (debug.enabled) {
   console.log('grep arguments')
