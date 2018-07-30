@@ -30,6 +30,8 @@ run script
 }
 ```
 
+Exits with 1 if there is ".only" somewhere in the files inside "specs" folder.
+
 ### warn
 
 If you just want to warn on found `.only`, use `stop-only --warn <folder>` syntax.

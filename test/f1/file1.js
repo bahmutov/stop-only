@@ -1,2 +1,2 @@
-// file with .only
+// file with only
 it.only('works', () => {})
