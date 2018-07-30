@@ -3,11 +3,12 @@
 const execa = require('execa')
 const debug = require('debug')('stop-only')
 const argv = require('minimist')(process.argv.slice(2), {
-  string: 'folder',
+  string: ['folder', 'skip'],
   boolean: 'warn',
   alias: {
     warn: 'w',
-    folder: 'f'
+    folder: 'f',
+    skip: 's'
   }
 })
 
@@ -17,25 +18,33 @@ if (debug.enabled) {
 }
 
 if (!argv.folder || !argv.folder.length) {
-  console.error('🔥 stop-only: pass at least a single folder with --folder, -f argument')
+  console.error(
+    '🔥 stop-only: pass at least a single folder with --folder, -f argument'
+  )
   process.exit(1)
 }
 
-const grepArguments = ['--line-number', '--recursive', '\\.only'].concat(argv.folder)
+let skipFolders = []
+if (argv.skip) {
+  skipFolders = skipFolders.concat(argv.skip)
+}
+let grepArguments = ['--line-number', '--recursive', '\\.only']
+
+if (skipFolders.length) {
+  skipFolders.forEach(folder => {
+    grepArguments.push('--exclude-dir', folder)
+  })
+}
+
+grepArguments = grepArguments.concat(argv.folder)
+
 if (debug.enabled) {
   console.log('grep arguments')
   console.log(grepArguments)
 }
 
-const grepFailed = (result) => {
-  console.error('grep with arguments below failed')
-  console.error(grepArguments)
-  console.error(result)
-  process.exit(2)
-}
-
-const grepFinished = (result) => {
-  if (result.code) {
+const grepFinished = result => {
+  if (result.code > 1) {
     console.error('Failed to run grep')
     console.error('grep arguments were')
     console.error(grepArguments)
@@ -43,19 +52,21 @@ const grepFinished = (result) => {
     process.exit(result.code)
   }
 
-  if (result.stdout) {
-    if (argv.warn) {
-      console.log('⚠️ Found .only in folder(s)')
-      console.log(result.stdout)
-      process.exit(0)
-    } else {
-      console.log('Found .only in folder(s) 👎')
-      console.log(result.stdout)
-      process.exit(1)
-    }
+  if (result.code === 1) {
+    debug('could not find .only in any folder')
+    process.exit(0)
   }
-  // else did not find ".only" anywhere in the specified folder(s)
+
+  // found ".only" somewhere
+  if (argv.warn) {
+    console.log('⚠️ Found .only in folder(s)')
+    console.log(result.stdout)
+    process.exit(0)
+  } else {
+    console.log('Found .only in folder(s) 👎')
+    console.log(result.stdout)
+    process.exit(1)
+  }
 }
 
-execa('grep', grepArguments)
-.then(grepFinished, grepFailed)
+execa('grep', grepArguments).then(grepFinished, grepFinished)

@@ -19,32 +19,30 @@ npm install --save-dev stop-only
 
 ### basic
 
-Assuming the tests are in the folder "specs", I recommend create an NPM
-run script
+Assuming the tests are in the folder "specs", I recommend create an NPM run script. Use `--folder` or `-f` to pass the folder(s) to search.
 
 ```json
 {
   "scripts": {
-    "stop-only": "stop-only specs"
+    "stop-only": "stop-only --folder specs --folder bin"
   }
 }
 ```
 
-Exits with 1 if there is ".only" somewhere in the files inside "specs" folder.
+Exits with 1 if there is ".only" somewhere in the files inside "specs" folder or inside "bin" folder.
 
 ### warn
 
-If you just want to warn on found `.only`, use `stop-only --warn <folder>` syntax.
+If you just want to warn on found `.only`, use `stop-only --warn <folder>` syntax. Alias `-w`.
 
 ### exclude folders
 
-If you need to exclude certain folders, use `grep` syntax
-[reference](https://explainshell.com/explain/1/grep)
+If you need to exclude certain folders, use `--skip` or `-s` option.
 
 ```json
 {
   "scripts": {
-    "stop-only": "stop-only specs --exclude-dir node_modules"
+    "stop-only": "stop-only specs --skip node_modules"
   }
 }
 ```

@@ -7,6 +7,8 @@ describe('stop-only', () => {
   const bin = join(__dirname, '..', 'bin', 'stop-only.js')
   const f1 = join(__dirname, 'f1')
   const f2 = join(__dirname, 'f2')
+  const f3 = join(__dirname, 'f3')
+
   // we are only testing exit code and standard output
   const wrapOptions = {filter: ['code', 'stdout']}
 
@@ -34,9 +36,25 @@ describe('stop-only', () => {
           la(result.includes('Found .only'), 'did not find', result)
         })
     })
+
+    describe('exclude option', () => {
+      it('skips folder with a flag --skip', () => {
+        return execaWrap('node', [bin, '-f', f3, '--skip', 'skip'], wrapOptions)
+          .then(result => {
+            la(result.includes('code: 0'), 'did not exit with 0', result)
+          })
+      })
+
+      it('skips folder with an alias -s', () => {
+        return execaWrap('node', [bin, '-f', f3, '-s', 'skip'], wrapOptions)
+          .then(result => {
+            la(result.includes('code: 0'), 'did not exit with 0', result)
+          })
+      })
+    })
   })
 
-  context.only('warns if it finds .only', () => {
+  context('warns if it finds .only', () => {
     it('in single folder f1', () => {
       return execaWrap('node', [bin, '--warn', '--folder', f1], wrapOptions)
         .then(result => {

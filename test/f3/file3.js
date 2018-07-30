@@ -1,2 +1,2 @@
 // file without disabled test
-it('f2/file2', () => {})
+it('f3/file3', () => {})
