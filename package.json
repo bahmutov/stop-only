@@ -94,7 +94,7 @@
     "nsp": "2.7.0",
     "pre-git": "3.17.1",
     "prettier-standard": "8.0.1",
-    "semantic-release": "6.3.6",
+    "semantic-release": "15.9.5",
     "simple-commit-message": "3.3.2",
     "standard": "11.0.1"
   },
