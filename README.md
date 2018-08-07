@@ -48,6 +48,18 @@ If you need to exclude certain folders, use `--skip` or `-s` option.
 }
 ```
 
+### exclude files
+
+You can exclude files by name using `--exclude` or `-e` option.
+
+```json
+{
+  "scripts": {
+    "stop-only": "stop-only specs --exclude foo-spec.js"
+  }
+}
+```
+
 ### Pre-commit or pre-push hook
 
 If using [pre-git][pre-git] to configure Git hooks, run this tool as a command

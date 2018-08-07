@@ -2,12 +2,15 @@ const execaWrap = require('execa-wrap')
 const {join} = require('path')
 const la = require('lazy-ass')
 
+const fromThisFolder = join.bind(null, __dirname)
+
 /* eslint-env mocha */
 describe('stop-only', () => {
-  const bin = join(__dirname, '..', 'bin', 'stop-only.js')
-  const f1 = join(__dirname, 'f1')
-  const f2 = join(__dirname, 'f2')
-  const f3 = join(__dirname, 'f3')
+  const bin = fromThisFolder('..', 'bin', 'stop-only.js')
+  const f1 = fromThisFolder('f1')
+  const f2 = fromThisFolder('f2')
+  const f3 = fromThisFolder('f3')
+  const f4 = fromThisFolder('f4')
 
   // we are only testing exit code and standard output
   const wrapOptions = {filter: ['code', 'stdout']}
@@ -62,6 +65,20 @@ describe('stop-only', () => {
 
       it('skips folder with an alias -s and commas', () => {
         return execaWrap('node', [bin, '-f', f3, '-s', 'skip,foo,bar'], wrapOptions)
+          .then(result => {
+            la(result.includes('code: 0'), 'did not exit with 0', result)
+          })
+      })
+
+      it('skips file when using --exclude option', () => {
+        return execaWrap('node', [bin, '-f', f4, '--exclude', 'spec.js'], wrapOptions)
+          .then(result => {
+            la(result.includes('code: 0'), 'did not exit with 0', result)
+          })
+      })
+
+      it('skips file when using -e option, which is alias to --exclude', () => {
+        return execaWrap('node', [bin, '-f', f4, '-e', 'spec.js'], wrapOptions)
           .then(result => {
             la(result.includes('code: 0'), 'did not exit with 0', result)
           })

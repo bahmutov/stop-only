@@ -3,12 +3,13 @@
 const execa = require('execa')
 const debug = require('debug')('stop-only')
 const argv = require('minimist')(process.argv.slice(2), {
-  string: ['folder', 'skip'],
+  string: ['folder', 'skip', 'exclude'],
   boolean: 'warn',
   alias: {
     warn: 'w',
     folder: 'f',
-    skip: 's'
+    skip: 's',
+    exclude: 'e'
   }
 })
 
@@ -51,12 +52,19 @@ const splitFolders = normalizeStrings(argv.folder)
 debug('split folders', splitFolders)
 
 const skipFolders = normalizeStrings(argv.skip)
+const skipFiles = normalizeStrings(argv.exclude)
 
 let grepArguments = ['--line-number', '--recursive', '\\.only']
 
 if (skipFolders.length) {
   skipFolders.forEach(folder => {
     grepArguments.push('--exclude-dir', folder)
+  })
+}
+
+if (skipFiles.length) {
+  skipFiles.forEach(filename => {
+    grepArguments.push('--exclude', filename)
   })
 }
 
