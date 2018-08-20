@@ -103,7 +103,7 @@
   },
   "dependencies": {
     "debug": "3.1.0",
-    "execa": "0.10.0",
+    "execa": "0.11.0",
     "minimist": "1.2.0"
   }
 }
