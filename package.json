@@ -102,7 +102,7 @@
     "travis-deploy-once": "5.0.8"
   },
   "dependencies": {
-    "debug": "3.2.5",
+    "debug": "3.2.6",
     "execa": "0.11.0",
     "minimist": "1.2.0"
   }
