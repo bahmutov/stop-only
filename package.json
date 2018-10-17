@@ -97,7 +97,7 @@
     "nsp": "2.8.1",
     "pre-git": "3.17.1",
     "prettier-standard": "8.0.1",
-    "semantic-release": "15.9.17",
+    "semantic-release": "15.10.3",
     "standard": "11.0.1",
     "travis-deploy-once": "5.0.8"
   },
