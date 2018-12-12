@@ -99,7 +99,7 @@
     "prettier-standard": "8.0.1",
     "semantic-release": "15.12.5",
     "standard": "11.0.1",
-    "travis-deploy-once": "5.0.9"
+    "travis-deploy-once": "5.0.10"
   },
   "dependencies": {
     "debug": "3.2.6",
