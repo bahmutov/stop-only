@@ -1,6 +1,6 @@
 # stop-only
 
-> Detects &#39;.only&#39; left in the code accidentally
+> Detects &#39;.only&#39; left in the code accidentally. Works with "describe", "context" and "it".
 
 [![NPM][npm-icon] ][npm-url]
 
