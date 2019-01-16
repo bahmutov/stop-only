@@ -54,7 +54,11 @@ debug('split folders', splitFolders)
 const skipFolders = normalizeStrings(argv.skip)
 const skipFiles = normalizeStrings(argv.exclude)
 
-let grepArguments = ['--line-number', '--recursive', '\\.only']
+let grepArguments = [
+  '--line-number',
+  '--recursive',
+  '[describe|context|it]\\.only'
+]
 
 if (skipFolders.length) {
   skipFolders.forEach(folder => {

@@ -10,7 +10,7 @@ before_script:
   - npm run stop-only
   - npm run warn-only
 after_success:
-  - npm run travis-deploy-once "npm run semantic-release"
+  - npm run semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
