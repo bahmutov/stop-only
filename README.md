@@ -78,7 +78,7 @@ See [package.json](package.json) (note here we have just local script name).
 
 **tip** you can warn on commit hook, while fail in pre-push hook.
 
-[pre-git]: github.com/bahmutov/pre-git#readme
+[pre-git]: https://github.com/bahmutov/pre-git#readme
 
 ### Commas
 
