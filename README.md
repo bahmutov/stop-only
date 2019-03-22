@@ -34,7 +34,7 @@ Exits with 1 if there is ".only" somewhere in the files inside "specs" folder or
 
 ### warn
 
-If you just want to warn on found `.only`, use `stop-only --warn <folder>` syntax. Alias `-w`.
+If you just want to warn on found `.only`, use `stop-only --warn --folder <folder path>` syntax. Alias `-w`.
 
 ### exclude folders
 
@@ -43,7 +43,7 @@ If you need to exclude certain folders, use `--skip` or `-s` option.
 ```json
 {
   "scripts": {
-    "stop-only": "stop-only specs --skip node_modules"
+    "stop-only": "stop-only --folder specs --skip node_modules"
   }
 }
 ```
@@ -55,7 +55,7 @@ You can exclude files by name using `--exclude` or `-e` option.
 ```json
 {
   "scripts": {
-    "stop-only": "stop-only specs --exclude foo-spec.js"
+    "stop-only": "stop-only --folder specs --exclude foo-spec.js"
   }
 }
 ```
