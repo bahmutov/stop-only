@@ -60,6 +60,20 @@ You can exclude files by name using `--exclude` or `-e` option.
 }
 ```
 
+### searching file
+
+You can search a single file using `--file` argument
+
+```text
+stop-only --file tests/spec.js
+```
+
+Or just warn
+
+```text
+stop-only --warn --file tests/spec.js
+```
+
 ### Pre-commit or pre-push hook
 
 If using [pre-git][pre-git] to configure Git hooks, run this tool as a command

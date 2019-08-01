@@ -177,4 +177,34 @@ describe('stop-only', () => {
       })
     })
   })
+
+  context('--file argument', () => {
+    it('stops if finds .only in a given file', () => {
+      return execaWrap('node', [bin, '--file', f1], wrapOptions).then(
+        result => {
+          la(result.includes('code: 1'), 'did not exit with 1', result)
+          la(result.includes('Found .only'), 'did not find', result)
+          la(
+            result.includes('file1.js:2:it.only'),
+            'does not show filepath',
+            result
+          )
+        }
+      )
+    })
+
+    it('warns if finds .only in a given file with --warn flag', () => {
+      return execaWrap('node', [bin, '--warn', '--file', f1], wrapOptions).then(
+        result => {
+          la(result.includes('code: 0'), 'it is only a warning', result)
+          la(result.includes('Found .only'), 'did not find', result)
+          la(
+            result.includes('file1.js:2:it.only'),
+            'does not show filepath',
+            result
+          )
+        }
+      )
+    })
+  })
 })
