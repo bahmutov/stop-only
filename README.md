@@ -94,6 +94,25 @@ See [package.json](package.json) (note here we have just local script name).
 
 [pre-git]: https://github.com/bahmutov/pre-git#readme
 
+### Check staged files only
+
+You can catch left-over `.only` in staged files only (and not in the entire folder). For example by using [husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged) and `--file` argument.
+
+```json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "stop-only --file"
+  }
+}
+```
+
+`lint-staged` in this case will call `stop-only --file <staged filename>` for each staged file. You can see all commands by running Git commit command with `DEBUG=lint-staged*` environment variable.
+
 ### Commas
 
 You can pass multiple folder names as separate arguments or comma-separated. These are equivalent
