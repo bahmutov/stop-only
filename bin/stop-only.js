@@ -52,8 +52,9 @@ const normalizeStrings = listOrString => {
 
 let grepArguments = [
   '--line-number',
-  '--recursive',
-  '[describe|context|it]\\.only'
+  '--recursive', 
+  '--extended-regexp',
+  '(describe|context|it)\\.only',
 ]
 
 if (hasFileArgument) {

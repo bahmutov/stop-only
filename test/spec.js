@@ -12,6 +12,7 @@ describe('stop-only', () => {
   const f3 = fromThisFolder('f3')
   const f4 = fromThisFolder('f4')
   const f5 = fromThisFolder('f5')
+  const f6 = fromThisFolder('f6');
 
   // we are only testing exit code and standard output
   const wrapOptions = { filter: ['code', 'stdout'] }
@@ -107,6 +108,16 @@ describe('stop-only', () => {
           la(result.includes('code: 0'), 'did not exit with 0', result)
         })
       })
+    })
+  })
+
+  context('should not find .only', () => {
+    it('should not find .only in single folder f6', () => {
+      return execaWrap('node', [bin, '--folder', f6], wrapOptions).then(
+        result => {
+          la(result.includes('code: 0'), 'did not exit with 0', result)
+        }
+      )
     })
   })
 
