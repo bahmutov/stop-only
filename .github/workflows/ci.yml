@@ -1,0 +1,26 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code 🛎
+        uses: actions/checkout@v2
+      - name: Install dependencies 📦
+        uses: bahmutov/npm-install@v1
+
+      - name: Run demo
+        run: |
+          npm run stop-only
+          npm run warn-only
+
+      - name: Run unit tests 🧪
+        run: npm test
+
+      - name: Semantic Release 🚀
+        uses: cycjimmy/semantic-release-action@v2
+        with:
+          branch: master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
