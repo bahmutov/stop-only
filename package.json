@@ -63,13 +63,12 @@
     "prelint": "npm run pretty",
     "pretest": "npm run lint",
     "pretty": "prettier-standard 'src/*.js' 'bin/*.js'",
-    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
+    "size": "npm pack --dry",
     "test": "npm run unit",
     "unit": "mocha test/spec.js",
     "semantic-release": "semantic-release",
     "stop-only": "node bin/stop-only.js -f src --skip excluded",
-    "warn-only": "node bin/stop-only.js --warn -f src",
-    "travis-deploy-once": "travis-deploy-once"
+    "warn-only": "node bin/stop-only.js --warn -f src"
   },
   "release": {
     "analyzeCommits": {
