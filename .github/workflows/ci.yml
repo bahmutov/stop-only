@@ -18,7 +18,8 @@ jobs:
         run: npm test
 
       - name: Semantic Release 🚀
-        uses: cycjimmy/semantic-release-action@v2
+        if: github.ref == 'refs/heads/master'
+        uses: cycjimmy/semantic-release-action@v3
         with:
           branch: master
         env:
