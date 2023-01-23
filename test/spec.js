@@ -12,7 +12,8 @@ describe('stop-only', () => {
   const f3 = fromThisFolder('f3')
   const f4 = fromThisFolder('f4')
   const f5 = fromThisFolder('f5')
-  const f6 = fromThisFolder('f6');
+  const f6 = fromThisFolder('f6')
+  const f7 = fromThisFolder('f7')
 
   // we are only testing exit code and standard output
   const wrapOptions = { filter: ['code', 'stdout'] }
@@ -216,6 +217,19 @@ describe('stop-only', () => {
           )
         }
       )
+    })
+  })
+
+  context('warns if it finds arbitrary text', () => {
+    it('finds the .pause left in folder f7', () => {
+      return execaWrap(
+        'node',
+        [bin, '--warn', '--folder', f7, '--text', '.pause'],
+        wrapOptions
+      ).then(result => {
+        la(result.includes('code: 0'), 'it is only a warning', result)
+        la(result.includes(' Found ".pause" in'), 'finds the pause', result)
+      })
     })
   })
 })
