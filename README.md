@@ -74,6 +74,14 @@ Or just warn
 stop-only --warn --file tests/spec.js
 ```
 
+### any text
+
+You can search for any text (and not just `.only`) by passing the parameter `--text`. For example, to find stray ".pause()" commands left in your specs, you can do
+
+```text
+stop-only --folder specs --text '.pause()'
+```
+
 ### Pre-commit or pre-push hook
 
 If using [pre-git][pre-git] to configure Git hooks, run this tool as a command
