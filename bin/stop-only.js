@@ -3,7 +3,7 @@
 const execa = require('execa')
 const debug = require('debug')('stop-only')
 const argv = require('minimist')(process.argv.slice(2), {
-  string: ['folder', 'skip', 'exclude', 'file'],
+  string: ['folder', 'skip', 'exclude', 'file', 'text'],
   boolean: 'warn',
   alias: {
     warn: 'w',
@@ -50,12 +50,17 @@ const normalizeStrings = listOrString => {
   return normalized
 }
 
-let grepArguments = [
-  '--line-number',
-  '--recursive',
-  '--extended-regexp',
-  '(describe|context|it)\\.only'
-]
+const textToFind = argv.text || '(describe|context|it)\\.only'
+
+let grepArguments = ['--line-number', '--recursive']
+
+if (argv.text) {
+  grepArguments.push(textToFind)
+} else {
+  // simply find ".only" after suite / test
+  grepArguments.push('--extended-regexp')
+  grepArguments.push('(describe|context|it)\\.only')
+}
 
 if (hasFileArgument) {
   grepArguments.push(argv.file)
@@ -101,17 +106,29 @@ const grepFinished = result => {
   }
 
   if (result.code === 1) {
-    debug('could not find .only anywhere')
+    if (argv.text) {
+      debug('could not find "%s" anywhere', argv.text)
+    } else {
+      debug('could not find .only anywhere')
+    }
     process.exit(0)
   }
 
-  // found ".only" somewhere
+  // found ".only" or specific text somewhere
   if (argv.warn) {
-    console.log('⚠️ Found .only in')
+    if (argv.text) {
+      console.log('⚠️ Found "%s" in', argv.text)
+    } else {
+      console.log('⚠️ Found .only in')
+    }
     console.log(result.stdout)
     process.exit(0)
   } else {
-    console.log('Found .only here 👎')
+    if (argv.text) {
+      console.log('Found "%s" here 👎', argv.text)
+    } else {
+      console.log('Found .only here 👎')
+    }
     console.log(result.stdout)
     process.exit(1)
   }
