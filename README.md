@@ -82,6 +82,14 @@ You can search for any text (and not just `.only`) by passing the parameter `--t
 stop-only --folder specs --text '.pause()'
 ```
 
+### regex
+
+You can also search for elements that match a regex expression by passing the parameter `--regex`. An example would be expanding the default behavior of the library by chaining other variables which could be chained by a `.only` (like 'test'). You just have to pass it a regex like
+
+```text
+stop-only --folder specs --regex '(describe|context|it|test)\\.only'
+```
+
 ### Pre-commit or pre-push hook
 
 If using [pre-git][pre-git] to configure Git hooks, run this tool as a command

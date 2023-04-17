@@ -68,6 +68,7 @@
     "unit": "mocha test/spec.js",
     "semantic-release": "semantic-release",
     "stop-only": "node bin/stop-only.js -f src --skip excluded",
+    "stop-only-regex": "node bin/stop-only.js --regex \"(describe|context|it|test)\\.only\" -f src --skip excluded",
     "warn-only": "node bin/stop-only.js --warn -f src",
     "demo-text": "node bin/stop-only.js --warn --text 'NPM module' -f src"
   },

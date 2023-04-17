@@ -3,7 +3,7 @@
 const execa = require('execa')
 const debug = require('debug')('stop-only')
 const argv = require('minimist')(process.argv.slice(2), {
-  string: ['folder', 'skip', 'exclude', 'file', 'text'],
+  string: ['folder', 'skip', 'exclude', 'file', 'text', 'regex'],
   boolean: 'warn',
   alias: {
     warn: 'w',
@@ -50,16 +50,22 @@ const normalizeStrings = listOrString => {
   return normalized
 }
 
-const textToFind = argv.text || '(describe|context|it)\\.only'
+const textToFind = argv.text || argv.regex
 
 let grepArguments = ['--line-number', '--recursive']
 
 if (argv.text) {
   grepArguments.push(textToFind)
 } else {
-  // simply find ".only" after suite / test
+  // if its not plain text we will use regex to find the text
   grepArguments.push('--extended-regexp')
-  grepArguments.push('(describe|context|it)\\.only')
+  if (argv.regex) {
+    // look for the text to find using regex
+    grepArguments.push(textToFind)
+  } else {
+    // simply find ".only" after suite / test
+    grepArguments.push('(describe|context|it)\\.only')
+  }
 }
 
 if (hasFileArgument) {
