@@ -83,7 +83,7 @@
     }
   },
   "devDependencies": {
-    "ban-sensitive-files": "1.10.3",
+    "ban-sensitive-files": "1.10.4",
     "dependency-check": "3.4.1",
     "deps-ok": "1.4.1",
     "dont-crack": "1.2.1",
