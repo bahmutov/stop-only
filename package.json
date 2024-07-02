@@ -94,7 +94,7 @@
     "mocha": "10.6.0",
     "pre-git": "3.17.1",
     "prettier-standard": "11.0.0",
-    "semantic-release": "17.4.7",
+    "semantic-release": "24.0.0",
     "standard": "14.3.4"
   },
   "dependencies": {
