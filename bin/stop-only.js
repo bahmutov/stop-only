@@ -13,6 +13,10 @@ const argv = require('minimist')(process.argv.slice(2), {
   }
 })
 
+function escapeRegExp (string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
 if (debug.enabled) {
   console.log('stop-only arguments')
   console.log(argv)
@@ -50,12 +54,18 @@ const normalizeStrings = listOrString => {
   return normalized
 }
 
-const textToFind = argv.text || '(describe|context|it)\\.only'
-
 let grepArguments = ['--line-number', '--recursive']
 
 if (argv.text) {
-  grepArguments.push(textToFind)
+  if (Array.isArray(argv.text)) {
+    debug('multiple text search')
+    grepArguments.push('--extended-regexp')
+    const escaped = argv.text.map(escapeRegExp)
+    grepArguments.push(`(${escaped.join('|')})`)
+  } else {
+    debug('simple text search')
+    grepArguments.push(argv.text)
+  }
 } else {
   // simply find ".only" after suite / test
   grepArguments.push('--extended-regexp')
