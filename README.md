@@ -82,6 +82,14 @@ You can search for any text (and not just `.only`) by passing the parameter `--t
 stop-only --folder specs --text '.pause()'
 ```
 
+### any multiple texts
+
+You can search for multiple text strings by providing multiple `--text` arguments. For example, to find both `.only` and `.skip` strings
+
+```text
+stop-only --folder specs --text '.only' --text '.skip'
+```
+
 ### Pre-commit or pre-push hook
 
 If using [pre-git][pre-git] to configure Git hooks, run this tool as a command
