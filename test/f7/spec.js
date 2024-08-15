@@ -1,4 +1,3 @@
-it('should only', () => {
-  cy.wrap()
-    .pause()
+it('has the pause', () => {
+  cy.pause()
 })

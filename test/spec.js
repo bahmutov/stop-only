@@ -231,5 +231,18 @@ describe('stop-only', () => {
         la(result.includes(' Found ".pause" in'), 'finds the pause', result)
       })
     })
+
+    it('supports multiple --text arguments', () => {
+      return execaWrap(
+        'node',
+        [bin, '--warn', '--folder', f7, '--text', '.pause', '--text', '.skip'],
+        wrapOptions
+      ).then(result => {
+        la(result.includes('code: 0'), 'it is only a warning', result)
+        la(result.includes(' Found "[ \'.pause\', \'.skip\' ]" in'), 'finds the pause and skip', result)
+        la(result.includes('spec2.js:1:it.skip'), 'finds the skip', result)
+        la(result.includes('spec.js:2:  cy.pause('), 'finds the pause', result)
+      })
+    })
   })
 })
