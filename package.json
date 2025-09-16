@@ -99,7 +99,7 @@
   },
   "dependencies": {
     "debug": "4.4.3",
-    "execa": "0.11.0",
+    "execa": "9.6.0",
     "minimist": "1.2.8"
   }
 }
