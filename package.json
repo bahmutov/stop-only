@@ -95,7 +95,7 @@
     "pre-git": "3.17.1",
     "prettier-standard": "11.0.0",
     "semantic-release": "24.2.9",
-    "standard": "14.3.4"
+    "standard": "17.1.2"
   },
   "dependencies": {
     "debug": "4.4.3",
